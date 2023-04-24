@@ -12,7 +12,26 @@ package q2
 //
 //Ajude os amigos a encontrar o número de problemas para os quais eles escreverão uma solução.
 
+import "fmt"
+
 func ProblemsSolved(answers [][3]bool) int {
-	// Seu código aqui
-	return 0
+	numSolved := 0
+	for _, row := range answers {
+		numTrue := 0
+		for _, answer := range row {
+			if answer {
+				numTrue++
+			}
+		}
+		if numTrue >= 2 {
+			numSolved++
+		}
+	}
+	return numSolved
+}
+
+func main() {
+	answers := [][3]bool{{true, false, true}, {true, true, false}, {false, true, true}, {true, true, true}}
+	numProblemsSolved := ProblemsSolved(answers)
+	fmt.Printf("Os amigos resolveram %d problemas", numProblemsSolved)
 }

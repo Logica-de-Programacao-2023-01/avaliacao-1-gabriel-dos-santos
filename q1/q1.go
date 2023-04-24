@@ -1,5 +1,11 @@
 package q1
 
+import (
+	"errors"
+	"fmt"
+	"strconv"
+)
+
 //Em um dia quente de verão, Pete e seu amigo Billy decidiram comprar uma melancia. Eles escolheram a maior e mais
 //saborosa, na opinião deles, e, em seguida, pesaram a fruta nas balanças, obtendo seu peso em quilos. Morrendo de sede,
 //correram para casa com a melancia e decidiram dividi-la. No entanto, enfrentaram um problema difícil.
@@ -14,6 +20,31 @@ package q1
 //da melancia for menor ou igual a 0, a função deve retornar um erro.
 
 func DivideWatermelon(weight int) (bool, error) {
-	// Seu código aqui
-	return false, nil
+	if weight <= 0 {
+		return false, errors.New("O peso da melancia dos amigos deve ser maior que zero")
+	}
+	if weight%2 == 0 && (weight/2)%2 == 0 {
+		return true, nil
+	} else {
+		return false, nil
+	}
+}
+
+func main() {
+	weightString := "10"
+	weight, err := strconv.Atoi(weightString)
+	if err != nil {
+		fmt.Println("Erro ao converter peso para int")
+		return
+	}
+
+	divide, err := DivideWatermelon(weight)
+
+	if err != nil {
+		fmt.Println(err)
+	} else if divide {
+		fmt.Println("É possível dividir a melancia em duas partes pares")
+	} else {
+		fmt.Println("Não foi possível dividir em duas partes pares")
+	}
 }
